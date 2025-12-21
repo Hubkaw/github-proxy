@@ -3,30 +3,19 @@ package com.fumology.githubproxy;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class GithubUserRepos {
+public class GithubUserRepo {
 
-    @JsonProperty("incomplete_results")
-    private boolean incompleteResults;
+    private String name;
 
-    private List<Repo> items;
+    @JsonProperty("fork")
+    private boolean isFork;
 
-    @Data
-    public static class Repo {
-        private long id;
+    @JsonProperty("full_name")
+    private String fullName;
 
-        private String name;
+    private Owner owner;
 
-        @JsonProperty("fork")
-        private boolean isFork;
-
-        @JsonProperty("full_name")
-        private String fullName;
-
-        private Owner owner;
-    }
 
     @Data
     public static class Owner {

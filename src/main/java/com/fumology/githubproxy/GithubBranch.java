@@ -1,2 +1,14 @@
-package com.fumology.githubproxy;public class GithubBranch {
+package com.fumology.githubproxy;
+
+import lombok.Data;
+
+@Data
+public class GithubBranch {
+    private String name;
+    private Commit commit;
+
+    @Data
+    public static class Commit {
+        private String sha;
+    }
 }

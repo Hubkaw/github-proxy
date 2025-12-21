@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Kuroneko-Botto",
+    "owner": { "login": "hubkaw" },
+    "fork": false
+  },
+  {
+    "name": "Github-proxy",
+    "owner": { "login": "hubkaw" },
+    "fork": true
+  }
+]

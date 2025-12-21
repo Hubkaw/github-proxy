@@ -1,0 +1,12 @@
+[
+  {
+    "name": "forked-repo",
+    "owner": { "login": "hubkaw-fork" },
+    "fork": true
+  },
+  {
+    "name": "fork",
+    "owner": { "login": "hubkaw-fork" },
+    "fork": true
+  }
+]

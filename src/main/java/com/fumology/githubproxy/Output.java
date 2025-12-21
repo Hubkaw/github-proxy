@@ -7,21 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class OutputDTO {
+public class Output {
 
-    private List<RepositoryDTO> repositories = new ArrayList();
+    private List<Repository> repositories = new ArrayList();
 
 
     @Data
-    public static class RepositoryDTO {
+    public static class Repository {
         private String name;
         private String ownerLogin;
-        private List<BranchDTO> branches = new ArrayList();
+        private List<Branch> branches = new ArrayList();
 
     }
 
     @Data
-    public static class BranchDTO {
+    public static class Branch {
         private String name;
         private String lastCommitSHA;
     }
