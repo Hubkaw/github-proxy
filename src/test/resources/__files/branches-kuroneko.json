@@ -1,0 +1,10 @@
+[
+  {
+    "name": "master",
+    "commit": { "sha": "7a8f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a21" }
+  },
+  {
+    "name": "develop",
+    "commit": { "sha": "abc123def456ghi789" }
+  }
+]
