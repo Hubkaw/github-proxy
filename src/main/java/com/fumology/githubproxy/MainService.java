@@ -13,42 +13,23 @@ public class MainService {
     private GithubFetcher githubFetcher;
 
     public Output getRepositoriesByLogin(String login) {
+        List<GithubUserRepo> allRepos = githubFetcher.getUserRepositories(login);
 
-        List<GithubUserRepo> fetched = githubFetcher.getUserRepositories(login);
+        List<Output.Repository> nonForkRepos = allRepos.stream()
+                .filter(repo -> !repo.fork())
+                .map(this::mapRepository)
+                .toList();
 
-        if (fetched == null) {
-            return null;
-        }
-
-        return mapRepos(fetched);
+        return new Output(nonForkRepos);
     }
 
-    private Output mapRepos(List<GithubUserRepo> userRepos) {
-        Output output = new Output();
+    private Output.Repository mapRepository(GithubUserRepo repo) {
+        List<Output.Branch> branches = githubFetcher.getRepoBranches(repo.owner().login(), repo.name())
+                .stream()
+                .map(b -> new Output.Branch(b.name(), b.commit().sha()))
+                .toList();
 
-        userRepos.stream()
-                .filter(r -> !r.isFork())
-                .forEach(i -> {
-                    Output.Repository repository = new Output.Repository();
-                    repository.setName(i.getName());
-                    repository.setOwnerLogin(i.getOwner().getLogin());
-                    fetchAndMapBranches(i.getOwner().getLogin(), i, repository);
-                    output.getRepositories().add(repository);
-                });
-
-        return output;
-    }
-
-    private void fetchAndMapBranches(String login, GithubUserRepo githubRepo, Output.Repository outputRepository) {
-        List<GithubBranch> githubBranches = githubFetcher.getRepoBranches(login, githubRepo.getName());
-        if (githubBranches != null) {
-            githubBranches.forEach(b -> {
-                Output.Branch branch = new Output.Branch();
-                branch.setName(b.getName());
-                branch.setLastCommitSHA(b.getCommit().getSha());
-                outputRepository.getBranches().add(branch);
-            });
-        }
+        return new Output.Repository(repo.name(), repo.owner().login(), branches);
     }
 
 }

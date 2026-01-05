@@ -91,7 +91,7 @@ public class MainControllerIntegrationTest {
         mockMvc.perform(get("/{login}", login))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.status").value(404))
-                .andExpect(jsonPath("$.message").value("There is no user named hubkaw2."));
+                .andExpect(jsonPath("$.message").value("There is no user with login hubkaw2"));
     }
 
 

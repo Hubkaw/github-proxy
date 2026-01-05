@@ -38,7 +38,7 @@ If the GitHub user does not exist:
 ```json
 {
   "status": 404,
-  "message": "There is no user named <login>."
+  "message": "There is no user with login <login>"
 }
 ```
 ### Tech stack

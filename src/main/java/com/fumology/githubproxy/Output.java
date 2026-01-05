@@ -1,28 +1,11 @@
 package com.fumology.githubproxy;
 
 
-import lombok.Data;
-
-import java.util.ArrayList;
 import java.util.List;
 
-@Data
-public class Output {
+public record Output(List<Repository> repositories) {
 
-    private List<Repository> repositories = new ArrayList();
+    public record Repository(String name, String ownerLogin, List<Branch> branches) {}
 
-
-    @Data
-    public static class Repository {
-        private String name;
-        private String ownerLogin;
-        private List<Branch> branches = new ArrayList();
-
-    }
-
-    @Data
-    public static class Branch {
-        private String name;
-        private String lastCommitSHA;
-    }
+    public record Branch(String name, String lastCommitSHA) {}
 }
